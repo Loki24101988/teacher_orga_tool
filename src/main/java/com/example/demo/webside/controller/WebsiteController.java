@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.pojos.Pupil;
 import com.example.demo.services.PupilService;
 import com.example.demo.services.PupilServiceImpl;
 
 @Controller
+@RequestMapping("/website")
 public class WebsiteController {
 
 	private PupilService pupilService;
@@ -19,7 +21,7 @@ public class WebsiteController {
 		this.pupilService = pupilService;
 	}
 	
-	@GetMapping("/website")
+	@GetMapping("/index")
 	public String getIndex(Model model) {
 		model.addAttribute("Teacher", "Hans");
 		return "index";
