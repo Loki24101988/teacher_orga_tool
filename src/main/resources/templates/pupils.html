@@ -1,0 +1,28 @@
+<html>
+	
+	<body>
+		
+		<h1>Die Schülerliste</h1>
+		<p>
+			Diese Seite ist nur eine Dummy Seite um zu sehen ob die wirklichen Dinge funktionieren.
+		</p>
+		
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Klasse</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${pupils.empty}">
+					<td colspan="2">No pupils found</td>
+				</tr>
+				<tr th:each="pupil: ${pupils}">
+					<td><span th:text="${pupil.name}"> Name </span></td>
+					<td><span th:text="${pupil.classname}"> Klasse </span></td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

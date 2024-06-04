@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.pojos.Pupil;
-import com.example.demo.services.PupilService;
+import com.example.demo.services.PupilServiceImpl;
 
 @Controller
 public class PupilController {
 	
-	private PupilService pupilService;
+	private PupilServiceImpl pupilService;
 	
-	public PupilController(PupilService pupilService) {
+	public PupilController(PupilServiceImpl pupilService) {
 		this.pupilService = pupilService;
 	}
 
-	@GetMapping("pupils")
+	@GetMapping("pupils2")
 	public ResponseEntity<List<Pupil>> getAllPupils() {
 		List<Pupil> allPupils = this.pupilService.getAllPupils();
 		return new ResponseEntity<>(allPupils, HttpStatus.OK);

@@ -27,8 +27,6 @@ public class Schoolclass {
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String schoolclassId;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "classes")
-	private List<Teacher> teachers;
 	
 	@OneToMany(mappedBy = "schoolclass", cascade = CascadeType.ALL)
 	private List<Pupil> schoolclassMember;
