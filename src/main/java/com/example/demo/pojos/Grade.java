@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.annotations.UuidGenerator.Style;
 
+import com.example.demo.enums.GradeTypes;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -40,4 +42,6 @@ public class Grade {
 	@ManyToOne
 	@JoinColumn(name = "examinerId", referencedColumnName = "teacherId")
 	private Teacher examiner;
+	
+	private GradeTypes gradeType;
 }
