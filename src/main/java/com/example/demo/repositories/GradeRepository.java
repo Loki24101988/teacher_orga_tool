@@ -13,4 +13,5 @@ public interface GradeRepository extends JpaRepository<Grade, String>{
 
 	public List<Grade> findByExaminerAndExamineeAndCreatedAt(Teacher examiner, Pupil examinee, LocalDateTime createdAt);
 	public List<Grade> findByExaminerAndExaminee(Teacher examiner, Pupil examinee);
+	public List<Grade> findByExaminer(Teacher examiner);
 }
