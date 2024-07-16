@@ -1,6 +1,7 @@
 package com.example.demo.pojos;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.annotations.UuidGenerator.Style;
@@ -30,6 +31,13 @@ public class Grade {
 	private BigDecimal grade;
 	
 	@ManyToOne
-	@JoinColumn(name = "pupilId")
-	private Pupil graduate;
+	@JoinColumn(name = "pupilId", referencedColumnName = "pupilId")
+	private Pupil examinee;
+	
+	@Column(updatable = false)
+	private LocalDateTime createdAt;
+	
+	@ManyToOne
+	@JoinColumn(name = "examinerId", referencedColumnName = "teacherId")
+	private Teacher examiner;
 }

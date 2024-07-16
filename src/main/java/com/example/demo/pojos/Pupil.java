@@ -51,6 +51,6 @@ public class Pupil {
 		this.dateOfBirth = dateOfBirth;
 	}
 	
-	@OneToMany(mappedBy = "graduate", cascade = {CascadeType.PERSIST})
+	@OneToMany(mappedBy = "examinee", cascade = {CascadeType.PERSIST})
 	private List<Grade> grades;
 }

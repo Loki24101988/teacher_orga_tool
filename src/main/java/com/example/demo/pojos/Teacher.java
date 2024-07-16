@@ -23,5 +23,7 @@ public class Teacher {
 	@OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
 	private List<Note> created;
 	
+	@OneToMany(mappedBy = "examiner", fetch = FetchType.LAZY)
+	private List<Grade> grades; 
 	
 }
