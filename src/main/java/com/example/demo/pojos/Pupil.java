@@ -3,11 +3,12 @@ package com.example.demo.pojos;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.annotations.UuidGenerator.Style;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -25,7 +26,7 @@ import lombok.Setter;
 public class Pupil {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
+	@UuidGenerator(style = Style.AUTO)
 	private String pupilId;
 	
 	@Column(nullable = false)
@@ -40,8 +41,8 @@ public class Pupil {
 	@OneToMany(mappedBy = "receiver", cascade = {CascadeType.PERSIST})
 	private List<Note> notes;
 	
-	@ManyToOne
-	@JoinColumn(name = "schoolclassId")
+	@ManyToOne(cascade = {CascadeType.PERSIST})
+	@JoinColumn(name = "schoolclass_pupil_id", referencedColumnName = "schoolclassId")
 	private Schoolclass schoolclass;
 	
 	public Pupil(String firstName, String lastName, LocalDate dateOfBirth) {
@@ -49,4 +50,7 @@ public class Pupil {
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 	}
+	
+	@OneToMany(mappedBy = "graduate", cascade = {CascadeType.PERSIST})
+	private List<Grade> grades;
 }

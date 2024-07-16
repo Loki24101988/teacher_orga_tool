@@ -10,8 +10,8 @@
 		<table>
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Klasse</th>
+					<th th:text="${headerName}">X</th>
+					<th th:text="${headerClass}">Y</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -19,8 +19,8 @@
 					<td colspan="2">No pupils found</td>
 				</tr>
 				<tr th:each="pupil: ${pupils}">
-					<td><span th:text="${pupil.name}"> Name </span></td>
-					<td><span th:text="${pupil.classname}"> Klasse </span></td>
+					<td><span th:text="${pupil.firstName}"> Name </span></td>
+					<td><span th:text="${pupil.lastName}"> Klasse </span></td>
 				</tr>
 			</tbody>
 		</table>

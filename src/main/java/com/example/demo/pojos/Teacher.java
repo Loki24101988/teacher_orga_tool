@@ -2,21 +2,26 @@ package com.example.demo.pojos;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
+import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.annotations.UuidGenerator.Style;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Teacher {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
+	@UuidGenerator(style = Style.AUTO)
 	public String teacherId;
+	
+	@OneToMany(mappedBy = "schoolclassTeacher", fetch = FetchType.LAZY)
+	private List<Schoolclass> schoolclasses;
+	
+	@OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
+	private List<Note> created;
 	
 	
 }

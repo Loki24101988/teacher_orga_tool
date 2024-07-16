@@ -1,11 +1,15 @@
 package com.example.demo.services;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 
 import com.example.demo.pojos.Note;
 import com.example.demo.pojos.Pupil;
+import com.example.demo.pojos.Teacher;
 import com.example.demo.repositories.PupilRepository;
 
 @Service
@@ -45,5 +49,13 @@ public class PupilServiceImpl implements PupilService {
 		}
 		
 		return false;
+	}
+
+	@Override
+	public List<Pupil> getAllPupilsForTeacher(Teacher teacher) {
+		Stream<Pupil> filter = this.pupilRepository.findAll().stream()
+		.filter(p -> p.getSchoolclass().getSchoolclassTeacher().teacherId.equals(teacher.teacherId));
+		List<Pupil> collect = filter.collect(Collectors.toList());
+		return collect;
 	}
 }
