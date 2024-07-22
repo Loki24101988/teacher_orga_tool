@@ -43,6 +43,7 @@ public class WebsiteController {
 		
 		model.addAttribute("headerName", "Name");
 		model.addAttribute("headerClass", "Klasse");
+		model.addAttribute("headerId", "ID");
 		model.addAttribute("pupils", this.convertPupilList(allPupils));
 		model.addAttribute("formPupil", new FormPupil());
 		return "pupils";

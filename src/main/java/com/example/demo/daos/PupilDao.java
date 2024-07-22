@@ -11,4 +11,5 @@ public class PupilDao {
 
 	private String firstName;
 	private String lastName;
+	private String pupilId;
 }

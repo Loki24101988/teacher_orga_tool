@@ -11,7 +11,7 @@ public class PupilConverter implements Converter<Pupil, PupilDao>{
 
 	@Override
 	public PupilDao convert(Pupil source) {
-		return new PupilDao(source.getFirstName(), source.getLastName());
+		return new PupilDao(source.getFirstName(), source.getLastName(), source.getPupilId());
 	}
 
 
