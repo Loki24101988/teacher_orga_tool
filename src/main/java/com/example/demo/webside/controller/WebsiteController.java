@@ -2,6 +2,7 @@ package com.example.demo.webside.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Controller;
@@ -34,15 +35,15 @@ public class WebsiteController {
 	
 	@GetMapping("/pupils")
 	public String getPupilSite(Model model) {
-		//List<Pupil> allPupils = this.pupilService.getAllPupils();
+		List<Pupil> allPupils = this.pupilService.getAllPupils();
+		
 		model.addAttribute("headerName", "Name");
 		model.addAttribute("headerClass", "Klasse");
-		model.addAttribute("pupils", generateTestList());
+		model.addAttribute("pupils", this.convertPupilList(allPupils));
 		return "pupils";
 	}
 	
-	private List<PupilDao> generateTestList() {
-		Pupil a  = new Pupil("Hans", "Meiser", LocalDate.now());
-		return List.of(this.converter.convert(a));
+	private List<PupilDao> convertPupilList(List<Pupil> pupilList) {
+		return pupilList.stream().map(pupil -> this.converter.convert(pupil)).collect(Collectors.toList());
 	}
 }
