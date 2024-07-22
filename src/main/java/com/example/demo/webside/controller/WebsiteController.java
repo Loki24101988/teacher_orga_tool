@@ -1,19 +1,23 @@
 package com.example.demo.webside.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.example.demo.daos.PupilDao;
+import com.example.demo.pojos.FormPupil;
 import com.example.demo.pojos.Pupil;
 import com.example.demo.services.PupilService;
-import com.example.demo.services.PupilServiceImpl;
 
 @Controller
 @RequestMapping("/website")
@@ -40,7 +44,18 @@ public class WebsiteController {
 		model.addAttribute("headerName", "Name");
 		model.addAttribute("headerClass", "Klasse");
 		model.addAttribute("pupils", this.convertPupilList(allPupils));
+		model.addAttribute("formPupil", new FormPupil());
 		return "pupils";
+	}
+	
+	@PostMapping("/pupils")
+	public String createNewPupil(@ModelAttribute("formPupil") FormPupil pupil, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			System.out.println(result.getErrorCount());
+			return "pupils";
+		}
+		Pupil createNewPupil = this.pupilService.createNewPupilFromFormPupil(pupil);
+		return "redirect:pupils";
 	}
 	
 	private List<PupilDao> convertPupilList(List<Pupil> pupilList) {

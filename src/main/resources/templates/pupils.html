@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	
 	<body>
 		
@@ -6,7 +6,7 @@
 		<p>
 			Diese Seite ist nur eine Dummy Seite um zu sehen ob die wirklichen Dinge funktionieren.
 		</p>
-		
+		<div th:if="${!pupils.empty}">
 		<table>
 			<thead>
 				<tr>
@@ -15,14 +15,21 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:if="${pupils.empty}">
-					<td colspan="2">No pupils found</td>
-				</tr>
 				<tr th:each="pupil: ${pupils}">
 					<td><span th:text="${pupil.firstName}"> Name </span></td>
 					<td><span th:text="${pupil.lastName}"> Klasse </span></td>
 				</tr>
 			</tbody>
 		</table>
+		</div>
+		<div th:if="${pupils.empty}">
+			<p>No pupils registered.</p>
+		</div>
+		<h1>Add new Pupil</h1>
+		<form action="#" th:action="@{/website/pupils}" th:object="${formPupil}" method="post">
+			<p><input type="text" th:field="*{firstName}" name="firstName"/></p>
+			<p><input type="text" th:field="*{lastName}" name="lastName"/></p>
+			<p><input type="submit" value="Submit" /></p>
+		</form>
 	</body>
 </html>

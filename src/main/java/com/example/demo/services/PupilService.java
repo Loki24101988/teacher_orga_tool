@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import java.util.List;
 
+import com.example.demo.pojos.FormPupil;
 import com.example.demo.pojos.Note;
 import com.example.demo.pojos.Pupil;
 import com.example.demo.pojos.Schoolclass;
@@ -18,4 +19,6 @@ public interface PupilService {
 	public List<Pupil> getAllPupilsForTeacher(Teacher teacher);
 	
 	public List<Pupil> getAllPupilsForSchoolclass(Schoolclass schoolclass);
+	
+	public Pupil createNewPupilFromFormPupil(FormPupil formPupil);
 }

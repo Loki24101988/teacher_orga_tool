@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -7,6 +8,7 @@ import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.pojos.FormPupil;
 import com.example.demo.pojos.Note;
 import com.example.demo.pojos.Pupil;
 import com.example.demo.pojos.Schoolclass;
@@ -67,5 +69,12 @@ public class PupilServiceImpl implements PupilService {
 		}
 		List<Pupil> findBySchoolclass = this.pupilRepository.findBySchoolclass(schoolclass);
 		return findBySchoolclass;
+	}
+
+	@Override
+	public Pupil createNewPupilFromFormPupil(FormPupil formPupil) {
+		Pupil pupil = new Pupil(formPupil.getFirstName(), formPupil.getLastName(), LocalDate.now());
+		Pupil createNewPupil = this.createNewPupil(pupil);
+		return createNewPupil;
 	}
 }
