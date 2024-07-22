@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.pojos.Note;
 import com.example.demo.pojos.Pupil;
+import com.example.demo.pojos.Schoolclass;
 import com.example.demo.pojos.Teacher;
 import com.example.demo.repositories.PupilRepository;
 
@@ -57,5 +58,14 @@ public class PupilServiceImpl implements PupilService {
 		.filter(p -> p.getSchoolclass().getSchoolclassTeacher().teacherId.equals(teacher.teacherId));
 		List<Pupil> collect = filter.collect(Collectors.toList());
 		return collect;
+	}
+
+	@Override
+	public List<Pupil> getAllPupilsForSchoolclass(Schoolclass schoolclass) {
+		if(schoolclass == null) {
+			return List.of();
+		}
+		List<Pupil> findBySchoolclass = this.pupilRepository.findBySchoolclass(schoolclass);
+		return findBySchoolclass;
 	}
 }
