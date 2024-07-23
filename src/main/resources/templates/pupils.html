@@ -12,6 +12,7 @@
 				<tr>
 					<th th:text="${headerName}">X</th>
 					<th th:text="${headerClass}">Y</th>
+					<th>Notes for pupil</th>
 					<th>Add note for Pupil</th>
 					<th>Delete Pupil</th>
 				</tr>
@@ -20,6 +21,13 @@
 				<tr th:each="pupil: ${pupils}">
 					<td><span th:text="${pupil.firstName}"> Name </span></td>
 					<td><span th:text="${pupil.lastName}"> Klasse </span></td>
+					<td>
+						<table>
+							<tr th:each="note: ${pupil.notes}">
+								<td><span th:text="${note.content}"></span></td>
+							</tr>
+						</table>
+					</td>
 					<td><form action="#" th:action="@{/website/addNoteForPupil}" th:object="${formNote}" method="post" ><input hidden="hidden" type="text" th:value="${pupil.pupilId}" name="pupilId"/>
 					<input type="text" th:field="*{content}"/><input type="submit" value="Submit"/></form></td>
 					<td><form action="#" th:action="@{/website/deletePupil}" th:object="${formDelete}" method="post" ><input hidden="hidden" type="text" th:value="${pupil.pupilId}" name="pupilId"/>
