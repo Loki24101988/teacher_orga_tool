@@ -1,6 +1,7 @@
 package com.example.demo.pojos;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.UuidGenerator;
@@ -41,7 +42,7 @@ public class Pupil {
 	@OneToMany(mappedBy = "receiver", cascade = {CascadeType.ALL})
 	private List<Note> notes;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST})
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "schoolclass_pupil_id", referencedColumnName = "schoolclassId")
 	private Schoolclass schoolclass;
 	
@@ -49,8 +50,10 @@ public class Pupil {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
+		this.notes = new ArrayList<>();
+		this.grades = new ArrayList<>();
 	}
 	
-	@OneToMany(mappedBy = "examinee", cascade = {CascadeType.PERSIST})
+	@OneToMany(mappedBy = "examinee", cascade = {CascadeType.ALL})
 	private List<Grade> grades;
 }

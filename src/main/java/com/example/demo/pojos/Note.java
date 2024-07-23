@@ -32,7 +32,7 @@ public class Note {
 	@Column(columnDefinition = "TEXT")
 	private String content;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "receiver_Id", referencedColumnName = "pupilId")
 	private Pupil receiver;
 	
