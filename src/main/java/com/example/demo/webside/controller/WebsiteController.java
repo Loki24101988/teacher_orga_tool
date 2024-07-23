@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.example.demo.daos.PupilDao;
+import com.example.demo.pojos.FormNoteForPupil;
 import com.example.demo.pojos.FormPupil;
+import com.example.demo.pojos.Note;
 import com.example.demo.pojos.Pupil;
 import com.example.demo.services.PupilService;
 
@@ -46,6 +48,7 @@ public class WebsiteController {
 		model.addAttribute("headerId", "ID");
 		model.addAttribute("pupils", this.convertPupilList(allPupils));
 		model.addAttribute("formPupil", new FormPupil());
+		model.addAttribute("formNote", new FormNoteForPupil());
 		return "pupils";
 	}
 	
@@ -56,6 +59,15 @@ public class WebsiteController {
 			return "pupils";
 		}
 		Pupil createNewPupil = this.pupilService.createNewPupilFromFormPupil(pupil);
+		return "redirect:pupils";
+	}
+	
+	@PostMapping("/addNoteForPupil")
+	public String addNoteToPupil(@ModelAttribute("formNote") FormNoteForPupil formNote) {
+		System.out.println("PupilID: " + formNote.getPupilId());
+		System.out.println("Content: " + formNote.getContent());
+		Pupil addNoteToPupil = this.pupilService.addNoteToPupil(formNote);
+		System.out.println(addNoteToPupil.getNotes());
 		return "redirect:pupils";
 	}
 	

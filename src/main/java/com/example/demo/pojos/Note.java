@@ -42,4 +42,11 @@ public class Note {
 	
 	@Column(updatable = false)
 	private LocalDateTime createdAt;
+	
+	public Note(String content, Pupil receiver, Teacher creator) {
+		this.content = content;
+		this.creator = creator;
+		this.receiver = receiver;
+		this.createdAt = LocalDateTime.now();
+	}
 }

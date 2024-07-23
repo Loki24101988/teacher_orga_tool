@@ -35,11 +35,15 @@ public class Schoolclass {
 	@Column(unique = true, nullable = false)
 	private String schoolclassName;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST})
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "schoolclass_teacher_id", referencedColumnName = "teacherId")
 	private Teacher schoolclassTeacher;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "schoolclass")
 	private List<Pupil> pupils;
+	
+	public Schoolclass(String schoolclassName) {
+		this.schoolclassName = schoolclassName;
+	}
 }

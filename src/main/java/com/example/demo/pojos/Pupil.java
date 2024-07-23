@@ -38,7 +38,7 @@ public class Pupil {
 	@Column(nullable = false)
 	private LocalDate dateOfBirth;
 	
-	@OneToMany(mappedBy = "receiver", cascade = {CascadeType.PERSIST})
+	@OneToMany(mappedBy = "receiver", cascade = {CascadeType.ALL})
 	private List<Note> notes;
 	
 	@ManyToOne(cascade = {CascadeType.PERSIST})

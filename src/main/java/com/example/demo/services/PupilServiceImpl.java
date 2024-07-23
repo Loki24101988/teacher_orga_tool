@@ -2,12 +2,14 @@ package com.example.demo.services;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.pojos.FormNoteForPupil;
 import com.example.demo.pojos.FormPupil;
 import com.example.demo.pojos.Note;
 import com.example.demo.pojos.Pupil;
@@ -76,5 +78,33 @@ public class PupilServiceImpl implements PupilService {
 		Pupil pupil = new Pupil(formPupil.getFirstName(), formPupil.getLastName(), LocalDate.now());
 		Pupil createNewPupil = this.createNewPupil(pupil);
 		return createNewPupil;
+	}
+
+	@Override
+	public Pupil getPupilForId(String pupilId) {
+		Optional<Pupil> findById = this.pupilRepository.findById(pupilId);
+		return findById.orElseThrow();
+	}
+
+	@Override
+	public Pupil storePupil(Pupil pupilToStore) {
+		Pupil saved = this.pupilRepository.save(pupilToStore);
+		return saved;
+	}
+
+	@Override
+	public Pupil addNoteToPupil(FormNoteForPupil formNoteForPupil) {
+		String pupilId = formNoteForPupil.getPupilId();
+		if(pupilId == null || "".equals(pupilId)) {
+			return null;
+		}
+		Optional<Pupil> findById = this.pupilRepository.findById(pupilId);
+		if(findById.isEmpty()) {
+			return null;
+		}
+		Pupil pupil = findById.get();
+		pupil.getNotes().add(new Note(formNoteForPupil.getContent(), pupil, new Teacher()));
+		Pupil save = this.pupilRepository.save(pupil);
+		return save;
 	}
 }
