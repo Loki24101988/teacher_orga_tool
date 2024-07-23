@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.demo.pojos.FormPupil;
+import com.example.demo.form.FormPupil;
 import com.example.demo.pojos.Note;
 import com.example.demo.pojos.Pupil;
 import com.example.demo.pojos.Teacher;

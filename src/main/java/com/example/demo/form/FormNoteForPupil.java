@@ -1,4 +1,4 @@
-package com.example.demo.pojos;
+package com.example.demo.form;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

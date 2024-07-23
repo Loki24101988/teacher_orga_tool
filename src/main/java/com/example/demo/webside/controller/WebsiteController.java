@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.example.demo.daos.PupilDao;
-import com.example.demo.pojos.FormDeletePupil;
-import com.example.demo.pojos.FormNoteForPupil;
-import com.example.demo.pojos.FormPupil;
+import com.example.demo.form.FormDeletePupil;
+import com.example.demo.form.FormNoteForPupil;
+import com.example.demo.form.FormPupil;
 import com.example.demo.pojos.Note;
 import com.example.demo.pojos.Pupil;
 import com.example.demo.services.PupilService;

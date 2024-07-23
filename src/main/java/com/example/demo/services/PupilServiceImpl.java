@@ -10,8 +10,8 @@ import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.pojos.FormNoteForPupil;
-import com.example.demo.pojos.FormPupil;
+import com.example.demo.form.FormNoteForPupil;
+import com.example.demo.form.FormPupil;
 import com.example.demo.pojos.Note;
 import com.example.demo.pojos.Pupil;
 import com.example.demo.pojos.Schoolclass;
