@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
@@ -45,7 +46,15 @@ public class PupilServiceImpl implements PupilService {
 	}
 	
 	private boolean isNoteAlredyAddedToPupil(Pupil pupil, Note note) {
-		if(note.getNoteId().equals("")) {
+		if(note == null) {
+			return false;
+		}
+		
+		if("".equals(note.getNoteId())) {
+			return false;
+		}
+		
+		if(pupil.getNotes() == null) {
 			return false;
 		}
 		
@@ -106,5 +115,23 @@ public class PupilServiceImpl implements PupilService {
 		pupil.getNotes().add(new Note(formNoteForPupil.getContent(), pupil, new Teacher()));
 		Pupil save = this.pupilRepository.save(pupil);
 		return save;
+	}
+
+	@Override
+	public Pupil deleteAllNotesForPupil(Pupil pupil) {
+		pupil.setNotes(new ArrayList<>());
+		Pupil save = this.pupilRepository.save(pupil);
+		return save;
+	}
+
+	@Override
+	public void deletePupilFromDatabase(Pupil pupil) {
+		this.pupilRepository.deleteById(pupil.getPupilId());
+			
+	}
+
+	@Override
+	public void deletePupilByIdfromDatabase(String pupilId) {
+		this.pupilRepository.deleteById(pupilId);		
 	}
 }

@@ -28,4 +28,10 @@ public interface PupilService {
 	public Pupil getPupilForId(String pupilId);
 	
 	public Pupil storePupil(Pupil pupilToStore);
+	
+	public Pupil deleteAllNotesForPupil(Pupil pupil);
+	
+	public void deletePupilFromDatabase(Pupil pupil);
+	
+	public void deletePupilByIdfromDatabase(String pupilId);
 }
