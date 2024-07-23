@@ -20,7 +20,7 @@ public class NoteServiceImpl implements NoteService {
 
 	@Override
 	public List<Note> getAllNotesForPupil(Pupil pupil) {
-		List<Note> findByReceiver = this.noteRepository.findByReceiver(pupil);
+		List<Note> findByReceiver = this.noteRepository.findByReceiverOrderByCreatedAtDesc(pupil);
 		return findByReceiver;
 	}
 
@@ -29,4 +29,13 @@ public class NoteServiceImpl implements NoteService {
 		List<Note> findByCreator = this.noteRepository.findByCreator(teacher);
 		return findByCreator;
 	}
+
+	@Override
+	public Note storeNote(Note note) {
+		Note save = this.noteRepository.save(note);
+		return save;
+	}
+	
+	
+
 }

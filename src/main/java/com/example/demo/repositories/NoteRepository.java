@@ -13,5 +13,6 @@ import java.util.List;
 @Repository
 public interface NoteRepository extends JpaRepository<Note, String>{
 	List<Note> findByReceiver(Pupil receiver);
+	List<Note> findByReceiverOrderByCreatedAtDesc(Pupil receiver);
 	List<Note> findByCreator(Teacher creator);
 }

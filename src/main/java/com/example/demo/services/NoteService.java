@@ -10,4 +10,6 @@ public interface NoteService {
 
 	List<Note> getAllNotesForPupil(Pupil pupil);
 	List<Note> getAllNotesForTeacher(Teacher teacher);
+	
+	Note storeNote(Note note);
 }
