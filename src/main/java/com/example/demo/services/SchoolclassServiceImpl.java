@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -25,9 +26,9 @@ public class SchoolclassServiceImpl implements SchoolclassService {
 
 	@Override
 	public Schoolclass createSchoolclass(String schoolclassName) {
-		List<Schoolclass> findBySchoolclassName = this.schoolclassRepository.findBySchoolclassName(schoolclassName);
-		if(findBySchoolclassName.size() != 0) {
-			return findBySchoolclassName.get(0);
+		Optional<Schoolclass> findBySchoolclassName = this.schoolclassRepository.findBySchoolclassName(schoolclassName);
+		if(findBySchoolclassName.isPresent()) {
+			return findBySchoolclassName.get();
 		}
 		Schoolclass schoolclass = new Schoolclass(schoolclassName);
 		Schoolclass save = this.schoolclassRepository.save(schoolclass);
