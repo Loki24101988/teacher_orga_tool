@@ -11,9 +11,10 @@
 		<div th:if="!${teacherOverviewDaos.empty}">
 			<table>
 				<thead>
-					<td>
+					<tr>
 						<th>Name</th>
-					</td>
+					</tr>
+					</thead>
 				</thead>
 				<tbody>
 					<tr th:each="dao: ${teacherOverviewDaos}">
