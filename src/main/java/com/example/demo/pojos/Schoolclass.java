@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,18 +30,18 @@ public class Schoolclass {
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String schoolclassId;
 	
-	@OneToMany(mappedBy = "schoolclass", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "schoolclass", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Pupil> schoolclassMember;
 	
 	@Column(unique = true, nullable = false)
 	private String schoolclassName;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
 	@JoinColumn(name = "schoolclass_teacher_id", referencedColumnName = "teacherId")
 	private Teacher schoolclassTeacher;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "schoolclass")
+	@OneToMany(mappedBy = "schoolclass", fetch = FetchType.LAZY)
 	private List<Pupil> pupils;
 	
 	public Schoolclass(String schoolclassName) {
