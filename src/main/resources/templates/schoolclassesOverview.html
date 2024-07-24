@@ -3,6 +3,26 @@
 		
 	</head>
 	<body>
-		
+		<h1>Schoolclasses Overview</h1>
+		<table>
+			<thead>
+				<tr>
+					<td>Schoolclasses</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="schoolclass:${schoolclassesDao}">
+					<td>
+						<span th:text="${schoolclass.schoolclassName}"></span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h1>Add new Schoolclass</h1>
+		<form action="#" th:action="@{/website/addschoolclass}" th:object="${formSchoolclass}" method="post">
+			<p><input type="text" name="schoolclassName"/></p>
+			<p><input type="submit" value="Submit" /></p>
+		</form>
+		<p><a th:href="@{/website/pupils}">Back to pupils</a></p>
 	</body>
 </html>
