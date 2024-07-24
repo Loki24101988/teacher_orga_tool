@@ -1,9 +1,11 @@
 package com.example.demo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.exceptions.TeacherNotFoundException;
 import com.example.demo.form.FormCreateTeacher;
 import com.example.demo.pojos.Teacher;
 import com.example.demo.repositories.TeacherRepository;
@@ -32,6 +34,13 @@ public class TeacherServiceImpl implements TeacherService {
 		.build();
 		Teacher save = this.teacherRepository.save(newTeacher);
 		return save;
+	}
+
+	@Override
+	public Teacher getTeacherForIs(String teacherId) throws TeacherNotFoundException {
+		Optional<Teacher> findById = this.teacherRepository.findById(teacherId);
+		
+		return findById.orElseThrow(() -> new TeacherNotFoundException("No teacher found for Id: " + teacherId));
 	}
 	
 	

@@ -18,7 +18,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="dao: ${teacherOverviewDaos}">
-						<td><span th:text="|${dao.lastName}, ${dao.firstName}|"></span></td>
+						<td><a th:href="@{|/website/teacherDetail?teacherId=${dao.teacherId}|}"><span th:text="|${dao.lastName}, ${dao.firstName}|"></a></span></td>
 					</tr>
 				</tbody>
 			</table>

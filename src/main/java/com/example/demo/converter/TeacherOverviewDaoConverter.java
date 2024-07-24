@@ -15,6 +15,7 @@ public class TeacherOverviewDaoConverter implements Converter<Teacher, TeacherOv
 		.builder()
 		.firstName(source.getFirstName())
 		.lastName(source.getLastName())
+		.teacherId(source.getTeacherId())
 		.build();
 	}
 
