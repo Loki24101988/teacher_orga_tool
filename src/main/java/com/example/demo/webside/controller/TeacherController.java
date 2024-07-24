@@ -6,9 +6,12 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.converter.TeacherOverviewDaoConverter;
+import com.example.demo.form.FormCreateTeacher;
 import com.example.demo.pojos.Teacher;
 import com.example.demo.services.TeacherService;
 
@@ -33,7 +36,14 @@ public class TeacherController {
 				.stream()
 				.map(teacher -> this.converter.convert(teacher))
 				.collect(Collectors.toList());
-		model.addAttribute("teacherOverviewDao", collect);
+		model.addAttribute("teacherOverviewDaos", collect);
+		model.addAttribute("formCreateTeacher", new FormCreateTeacher());
 		return "teacherOverview";
+	}
+	
+	@PostMapping("/createNewTeacher")
+	public String createNewTeacher(@ModelAttribute("formCreateTeacher") FormCreateTeacher formCreateTeacher) {
+		Teacher createNewTeacher = this.teacherService.createNewTeacher(formCreateTeacher);
+		return "redirect:allteachers";
 	}
 }
