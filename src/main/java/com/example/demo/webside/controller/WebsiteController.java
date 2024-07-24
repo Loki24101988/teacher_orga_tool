@@ -18,6 +18,7 @@ import com.example.demo.daos.PupilDao;
 import com.example.demo.form.FormDeletePupil;
 import com.example.demo.form.FormNoteForPupil;
 import com.example.demo.form.FormPupil;
+import com.example.demo.form.FormPupilDetail;
 import com.example.demo.pojos.Note;
 import com.example.demo.pojos.Pupil;
 import com.example.demo.services.PupilService;
@@ -51,6 +52,7 @@ public class WebsiteController {
 		model.addAttribute("formPupil", new FormPupil());
 		model.addAttribute("formNote", new FormNoteForPupil());
 		model.addAttribute("formDelete", new FormDeletePupil());
+		model.addAttribute("formDetailDao", new FormPupilDetail());
 		return "pupils";
 	}
 	

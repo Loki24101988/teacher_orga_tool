@@ -3,10 +3,39 @@
 		
 	</head>
 	<body>
-		<h1 th:text="'{pupil.firstname} + ' '${pupil.lastname}'"></h1>
+		<h1 th:text="|${pupilDetailDao.firstName} ${pupilDetailDao.lastName}|"></h1>
 		<table>
-			
+			<thead>
+				<tr>
+					<th>Schoolclass</th>
+					<th>Notes</th>
+					<th>Grades</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${pupilDetailDao.schoolclass}"></td>
+					<td>
+						<table>
+							<thead>
+								<tr>
+									<th>Content</th>
+									<th>Creator</th>
+									<th>Created At</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="note: ${pupilDetailDao.notes}">
+									<td><span th:text="${note.content}"></span></td>
+									<td><span th:text="${note.creator.teacherId}"></span></td>
+									<td><span th:text="${note.createdAt}"></span></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
 		</table>
-		<p><a href="@{/website/pupils}">Return to Overview</a></p>
+		<p><a th:href="@{/website/pupils}">Return to Overview</a></p>
 	</body>
 </html>
