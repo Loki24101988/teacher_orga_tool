@@ -19,7 +19,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="pupil: ${pupils}">
-					<td><a th:href="@{|/website/pupilsDetailPage?pupilId=${pupil.pupilId}|}"><span th:text="|${pupil.lastName}, ${pupil.firstName}|"> Name </span></a></td>
+					<td><a th:href="@{|pupilsDetailPage?pupilId=${pupil.pupilId}|}"><span th:text="|${pupil.lastName}, ${pupil.firstName}|"> Name </span></a></td>
 					<td><span th:text="${pupil.schoolclassName}"> Klasse </span></td>
 					<td>
 						<table>
