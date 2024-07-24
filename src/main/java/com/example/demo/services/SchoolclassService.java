@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import java.util.List;
 
+import com.example.demo.exceptions.SchoolclassNotFoundException;
 import com.example.demo.pojos.Pupil;
 import com.example.demo.pojos.Schoolclass;
 import com.example.demo.pojos.Teacher;
@@ -16,5 +17,5 @@ public interface SchoolclassService {
 	
 	public Schoolclass addPupilToSchoolclass(Schoolclass schoolclass, Pupil pupil);
 	
-	public Schoolclass getSchoolclassByName(String schoolclassName);
+	public Schoolclass getSchoolclassByName(String schoolclassName) throws SchoolclassNotFoundException;
 }

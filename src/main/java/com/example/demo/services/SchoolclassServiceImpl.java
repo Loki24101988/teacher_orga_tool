@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.exceptions.SchoolclassNotFoundException;
 import com.example.demo.pojos.Pupil;
 import com.example.demo.pojos.Schoolclass;
 import com.example.demo.pojos.Teacher;
@@ -74,8 +75,8 @@ public class SchoolclassServiceImpl implements SchoolclassService {
 	}
 
 	@Override
-	public Schoolclass getSchoolclassByName(String schoolclassName) {
+	public Schoolclass getSchoolclassByName(String schoolclassName) throws SchoolclassNotFoundException {
 		Optional<Schoolclass> findBySchoolclassName = this.schoolclassRepository.findBySchoolclassName(schoolclassName);
-		return findBySchoolclassName.orElseThrow();
+		return findBySchoolclassName.orElseThrow(() -> new SchoolclassNotFoundException("Schoolclass with name: " + schoolclassName + " cannot be found"));
 	}
 }
