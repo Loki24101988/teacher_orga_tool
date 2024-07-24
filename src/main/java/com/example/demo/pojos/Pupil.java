@@ -10,6 +10,7 @@ import org.hibernate.annotations.UuidGenerator.Style;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -39,10 +40,10 @@ public class Pupil {
 	@Column(nullable = false)
 	private LocalDate dateOfBirth;
 	
-	@OneToMany(mappedBy = "receiver", cascade = {CascadeType.ALL})
+	@OneToMany(mappedBy = "receiver", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
 	private List<Note> notes;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
 	@JoinColumn(name = "schoolclass_pupil_id", referencedColumnName = "schoolclassId")
 	private Schoolclass schoolclass;
 	
@@ -54,6 +55,6 @@ public class Pupil {
 		this.grades = new ArrayList<>();
 	}
 	
-	@OneToMany(mappedBy = "examinee", cascade = {CascadeType.ALL})
+	@OneToMany(mappedBy = "examinee", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
 	private List<Grade> grades;
 }
