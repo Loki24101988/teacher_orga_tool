@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.converter.TeacherOverviewDaoConverter;
+import com.example.demo.daos.TeacherOverviewDao;
 import com.example.demo.form.FormCreateTeacher;
 import com.example.demo.pojos.Teacher;
 import com.example.demo.services.TeacherService;
@@ -32,7 +33,7 @@ public class TeacherController {
 	@GetMapping("/allteachers")
 	public String getAllTeachers(Model model) {
 		List<Teacher> allTeachers = this.teacherService.getAllTeachers();
-		List<TeacherOverviewDaoConverter> collect = allTeachers
+		List<TeacherOverviewDao> collect = allTeachers
 				.stream()
 				.map(teacher -> this.converter.convert(teacher))
 				.collect(Collectors.toList());

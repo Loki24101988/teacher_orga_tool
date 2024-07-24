@@ -3,15 +3,19 @@ package com.example.demo.converter;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.daos.TeacherOverviewDao;
 import com.example.demo.pojos.Teacher;
 
 @Component
-public class TeacherOverviewDaoConverter implements Converter<Teacher, TeacherOverviewDaoConverter>{
+public class TeacherOverviewDaoConverter implements Converter<Teacher, TeacherOverviewDao>{
 
 	@Override
-	public TeacherOverviewDaoConverter convert(Teacher source) {
-		// TODO Auto-generated method stub
-		return null;
+	public TeacherOverviewDao convert(Teacher source) {
+		return TeacherOverviewDao
+		.builder()
+		.firstName(source.getFirstName())
+		.lastName(source.getLastName())
+		.build();
 	}
 
 }
