@@ -35,7 +35,7 @@ public class WebsiteController {
 		this.converter = converter;
 	}
 	
-	@GetMapping("/index")
+	@GetMapping({"/index", "/"})
 	public String getIndex(Model model) {
 		model.addAttribute("Teacher", "Hans");
 		return "index";
