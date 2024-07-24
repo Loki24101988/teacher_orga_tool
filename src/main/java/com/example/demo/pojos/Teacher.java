@@ -18,6 +18,10 @@ public class Teacher {
 	@UuidGenerator(style = Style.AUTO)
 	public String teacherId;
 	
+	public String firstName;
+	
+	private String lastName;
+	
 	@OneToMany(mappedBy = "schoolclassTeacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Schoolclass> schoolclasses;
 	
