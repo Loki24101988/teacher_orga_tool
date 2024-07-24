@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.converter.TeacherOverviewDaoConverter;
 import com.example.demo.daos.TeacherOverviewDao;
+import com.example.demo.exceptions.TeacherNotFoundException;
 import com.example.demo.form.FormCreateTeacher;
 import com.example.demo.pojos.Teacher;
+import com.example.demo.services.SchoolclassService;
 import com.example.demo.services.TeacherService;
 
 @Controller
@@ -22,11 +25,15 @@ public class TeacherController {
 
 	private TeacherService teacherService;
 	
+	private SchoolclassService schoolclassService;
+	
 	private TeacherOverviewDaoConverter converter;
 	
 	public TeacherController(TeacherService teacherService,
+			SchoolclassService schoolclassService,
 			TeacherOverviewDaoConverter converter) {
 		this.teacherService = teacherService;
+		this.schoolclassService = schoolclassService;
 		this.converter = converter;
 	}
 	
@@ -46,5 +53,13 @@ public class TeacherController {
 	public String createNewTeacher(@ModelAttribute("formCreateTeacher") FormCreateTeacher formCreateTeacher) {
 		Teacher createNewTeacher = this.teacherService.createNewTeacher(formCreateTeacher);
 		return "redirect:allteachers";
+	}
+	
+	@GetMapping("/teacherDetail")
+	public String getTeacherDetailPageForId(@RequestParam("teacherId") String teacherId, Model model) throws TeacherNotFoundException {
+		Teacher teacherForIs = this.teacherService.getTeacherForIs(teacherId);
+		model.addAttribute("teacherFirstName", teacherForIs.getFirstName());
+		model.addAttribute("teacherLastName", teacherForIs.getLastName());
+		return "teacherDetailPage";
 	}
 }
