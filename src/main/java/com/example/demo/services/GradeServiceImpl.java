@@ -37,10 +37,10 @@ public class GradeServiceImpl implements GradeService {
 	}
 
 	@Override
-	public Boolean createNewGrade(BigDecimal value, Teacher examiner, Pupil examinee, GradeTypes type) {
+	public Grade createNewGrade(BigDecimal value, Teacher examiner, Pupil examinee, GradeTypes type) {
 		Grade newGrade = Grade.builder().examiner(examiner).examinee(examinee).createdAt(LocalDateTime.now()).gradeType(type).build();
-		this.gradeRepository.save(newGrade);
-		return true;
+		Grade save = this.gradeRepository.save(newGrade);
+		return save;
 	}
 
 	@Override

@@ -15,6 +15,6 @@ public interface GradeService {
 	public List<Grade> getAllGradesForPupilAndTeacherForActualYear(Teacher teacher, Pupil pupil);
 	public List<Grade> getAllGradesForPupilAndTeacherForSpecialYear(Teacher teacher, Pupil pupil, LocalDateTime specialYear);
 	
-	public Boolean createNewGrade(BigDecimal value, Teacher examiner, Pupil examinee, GradeTypes type);
+	public Grade createNewGrade(BigDecimal value, Teacher examiner, Pupil examinee, GradeTypes type);
 
 }
