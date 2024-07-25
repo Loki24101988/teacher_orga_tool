@@ -12,7 +12,8 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+		//TODO: Implement real authentification for all users
 		return http.csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests((requests) -> requests.requestMatchers("/*/**").permitAll()).build();
+                .authorizeHttpRequests((requests) -> requests.anyRequest().permitAll()).build();
 	}
 }
