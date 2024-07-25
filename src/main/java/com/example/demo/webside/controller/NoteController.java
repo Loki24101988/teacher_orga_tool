@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.exceptions.PupilNotfoundForIdException;
 import com.example.demo.form.FormNoteForPupil;
+import com.example.demo.pojos.Pupil;
 import com.example.demo.services.NoteService;
 import com.example.demo.services.PupilService;
 
@@ -24,7 +26,10 @@ public class NoteController {
 	}
 	
 	@PostMapping("/addnote")
-	public String addNoteForPupil(@ModelAttribute("formNoteForPupil") FormNoteForPupil formNoteForPupil, Model model) {
+	public String addNoteForPupil(@ModelAttribute("formNoteForPupil") FormNoteForPupil formNoteForPupil, Model model) throws PupilNotfoundForIdException {
+		Pupil pupilForId = this.pupilService.getPupilForId(formNoteForPupil.getPupilId());
+		
+		
 		return "redirect:pupils";
 	}
 
