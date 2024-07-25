@@ -11,5 +11,6 @@ public class FormNoteForPupil {
 
 	private String content;
 	private String pupilId;
+	private String teacherId;
 	
 }
