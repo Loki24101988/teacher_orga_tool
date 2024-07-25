@@ -12,6 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -36,9 +38,10 @@ public class Schoolclass {
 	@Column(unique = true, nullable = false)
 	private String schoolclassName;
 	
-	@ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
-	@JoinColumn(name = "schoolclass_teacher_id", referencedColumnName = "teacherId")
-	private Teacher schoolclassTeacher;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "teacher_schoolclasses", joinColumns = @JoinColumn(name = "schoolclassId"),
+	inverseJoinColumns = @JoinColumn(name = "teacherId"))
+	private List<Teacher> schoolclassTeachers;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "schoolclass", fetch = FetchType.LAZY)
