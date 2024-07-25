@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import java.util.List;
 
+import com.example.demo.exceptions.PupilNotfoundForIdException;
 import com.example.demo.form.FormNoteForPupil;
 import com.example.demo.form.FormPupil;
 import com.example.demo.pojos.Note;
@@ -25,7 +26,7 @@ public interface PupilService {
 	
 	public Pupil addNoteToPupil(FormNoteForPupil formNoteForPupil);
 	
-	public Pupil getPupilForId(String pupilId);
+	public Pupil getPupilForId(String pupilId) throws PupilNotfoundForIdException;
 	
 	public Pupil storePupil(Pupil pupilToStore);
 	

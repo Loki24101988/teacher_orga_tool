@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.exceptions.PupilNotfoundForIdException;
 import com.example.demo.form.FormNoteForPupil;
 import com.example.demo.form.FormPupil;
 import com.example.demo.pojos.Note;
@@ -90,9 +91,9 @@ public class PupilServiceImpl implements PupilService {
 	}
 
 	@Override
-	public Pupil getPupilForId(String pupilId) {
+	public Pupil getPupilForId(String pupilId) throws PupilNotfoundForIdException {
 		Optional<Pupil> findById = this.pupilRepository.findById(pupilId);
-		return findById.orElseThrow();
+		return findById.orElseThrow(() -> new PupilNotfoundForIdException("No pupil found for pupilId: " + pupilId));
 	}
 
 	@Override
