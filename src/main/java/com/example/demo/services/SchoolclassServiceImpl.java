@@ -43,7 +43,7 @@ public class SchoolclassServiceImpl implements SchoolclassService {
 			return schoolclass;
 		}
 		
-		schoolclass.setSchoolclassTeacher(teacher);
+		schoolclass.getSchoolclassTeachers().add(teacher);
 		Schoolclass save = this.schoolclassRepository.save(schoolclass);
 		return save;
 	}
