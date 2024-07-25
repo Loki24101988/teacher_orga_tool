@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.converter.PupilDetailConverter;
 import com.example.demo.daos.PupilDetailDao;
+import com.example.demo.exceptions.PupilNotfoundForIdException;
 import com.example.demo.form.FormPupilDetail;
 import com.example.demo.pojos.Pupil;
 import com.example.demo.services.PupilService;
@@ -25,7 +26,7 @@ public class PupilDetailController {
 	}
 	
 	@GetMapping("/pupilsDetailPage")
-	public String showdetailsForPupil(@ModelAttribute("formDetail") FormPupilDetail detail, Model model) {
+	public String showdetailsForPupil(@ModelAttribute("formDetail") FormPupilDetail detail, Model model) throws PupilNotfoundForIdException {
 		Pupil pupilForId = this.pupilService.getPupilForId(detail.getPupilId());
 		PupilDetailDao convert = this.converter.convert(pupilForId);
 		model.addAttribute("pupilDetailDao", convert);
