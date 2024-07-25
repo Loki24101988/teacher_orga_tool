@@ -4,9 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 
@@ -67,10 +64,13 @@ public class PupilServiceImpl implements PupilService {
 
 	@Override
 	public List<Pupil> getAllPupilsForTeacher(Teacher teacher) {
-		Stream<Pupil> filter = this.pupilRepository.findAll().stream()
-		.filter(p -> p.getSchoolclass().getSchoolclassTeacher().teacherId.equals(teacher.teacherId));
-		List<Pupil> collect = filter.collect(Collectors.toList());
-		return collect;
+		List<Pupil> allPupilsForTeacher = new ArrayList<>();
+		for(Schoolclass schoolclass: teacher.getSchoolclasses()) {
+			List<Pupil> allPupilsForSchoolclass = this.getAllPupilsForSchoolclass(schoolclass);
+			allPupilsForTeacher.addAll(allPupilsForSchoolclass);
+		}
+		
+		return allPupilsForTeacher;
 	}
 
 	@Override
